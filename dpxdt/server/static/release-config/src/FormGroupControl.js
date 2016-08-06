@@ -15,6 +15,8 @@ type FormGroupControlProps = {
   getValidationState?: Function,
   label: string,
   placeholder?: string,
+  readOnly?: boolean,
+  type?: ?string,
 };
 
 const ValidationState = {
@@ -34,9 +36,21 @@ export default class FormGroupControl extends Component {
   }
 
   render() {
-    let { arrayIndex, arrayFields, field, label, placeholder, getValidationState, ...props } = this.props;
+    let {
+      arrayIndex,
+      arrayFields,
+      field,
+      getValidationState,
+      label,
+      placeholder,
+      readOnly,
+      type,
+      ...props,
+    } = this.props;
     getValidationState = getValidationState || this.getValidationState;
     let validationState = getValidationState(field);
+    field.readOnly = !!readOnly;
+    field.type = type;
     return (
       <FormGroup
         {...props}
@@ -53,6 +67,7 @@ export default class FormGroupControl extends Component {
             validationState={validationState}
           /> :
           <FormControl
+            componentClass={field.type}
             placeholder={placeholder}
             {...field}
           />
@@ -70,17 +85,20 @@ export default class FormGroupControl extends Component {
   }
 }
 
-export const AddRemoveButtons = ({ arrayFields, arrayIndex }) => (
+export const AddRemoveButtons = ({ arrayFields, arrayIndex, readOnly }) => (
   <InputGroup.Button>
     {
-      arrayIndex === arrayFields.length - 1 && arrayFields.length > 1 ?
+      arrayIndex === arrayFields.length - 1 &&
+      arrayFields.length > 1 &&
+      !readOnly ?
       <Button type="button" onClick={() => {
         arrayFields.removeField(arrayIndex);
       }}>-</Button> :
       null
     }
     {
-      arrayIndex === arrayFields.length - 1 ?
+      arrayIndex === arrayFields.length - 1 &&
+      !readOnly ?
       <Button type="button" onClick={() => {
         // `{}` ensures an empty child for objects is added, works fine for flat fields.
         arrayFields.addField({});
@@ -92,9 +110,16 @@ export const AddRemoveButtons = ({ arrayFields, arrayIndex }) => (
   </InputGroup.Button>
 );
 
-const ArrayInputWithAddRemoveButtons = ({ arrayFields, arrayIndex, field, validationState }) => (
+const ArrayInputWithAddRemoveButtons = ({ arrayFields, arrayIndex, field, readOnly, validationState }) => (
   <InputGroup>
-    <FormControl {...field} />
-    <AddRemoveButtons arrayFields={arrayFields} arrayIndex={arrayIndex} />
+    <FormControl
+      componentClass={field.type}
+      {...field}
+    />
+    <AddRemoveButtons
+      arrayFields={arrayFields}
+      arrayIndex={arrayIndex}
+      readOnly={!!field.readOnly}
+    />
   </InputGroup>
 );

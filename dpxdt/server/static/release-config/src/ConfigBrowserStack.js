@@ -4,11 +4,16 @@ import {
   ControlLabel,
 } from 'react-bootstrap';
 
+import BrowserStackDesiredCapabilities from './BrowserStackDesiredCapabilities.js';
 import FormGroupControl from './FormGroupControl.js';
 
 type ConfigBrowserStackProps = {
   buildID: string,
   fields: Object,
+};
+
+const handleAddBrowserStackDesiredCapabilities = () => {
+
 };
 
 const ConfigBrowserStack = (props: ConfigBrowserStackProps) => {
@@ -21,8 +26,18 @@ const ConfigBrowserStack = (props: ConfigBrowserStackProps) => {
   return (
     <div>
       <p>
-        <a href="https://www.browserstack.com/automate/python" target="_blank">
-          Use Browserstack to get your configuration
+        Courtesy of
+        {' '}
+        <a
+          href="https://www.browserstack.com/automate/python" target="_blank"
+          style={{ display: 'inline-block' }}>
+          <img
+            alt=""
+            height="40"
+            src="//pbs.twimg.com/profile_images/451968255846928384/0pyDMTyp.png"
+          />
+          {' '}
+          BrowserStack
         </a>
       </p>
 
@@ -33,14 +48,18 @@ const ConfigBrowserStack = (props: ConfigBrowserStackProps) => {
       />
 
       <ControlLabel>Desired Capabilities</ControlLabel>
+      <BrowserStackDesiredCapabilities
+        onAdd={dc => { desired_capabilities.addField(JSON.stringify(dc)) }}
+      />
       {desired_capabilities.map((desired_capability, i) =>
         <FormGroupControl
           arrayFields={desired_capabilities}
           arrayIndex={i}
           field={desired_capability}
           key={i}
+          readOnly={true}
+          type="textarea"
         />)}
-
     </div>
   );
 };
