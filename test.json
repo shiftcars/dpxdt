@@ -1,0 +1,39 @@
+[
+    {
+        "name": "About page",
+        "run_url": "https://shift.com/enthusiasts",
+        "run_config": {
+            "command_executor": "http://lindseysimon1:i77w8wZndBmpDXXz1qMe@hub.browserstack.com:80/wd/hub",
+            "desired_capabilities": {
+                "browser": "Firefox",
+                "browser_version": "47.0",
+                "os": "OS X",
+                "os_version": "El Capitan",
+                "resolution": "1024x768"
+            },
+            "viewportSize": {
+                "width": 1024,
+                "height": 768
+            },
+            "injectCss": ".video-wrapper { visibility: hidden; }",
+            "userAgent": "dpxdt-ZHGr3FnW8JnEu6ppR207j53p82koykKe"
+        },
+        "ref_url": "https://shift.com/enthusiasts",
+        "ref_config": {
+            "command_executor": "http://lindseysimon1:i77w8wZndBmpDXXz1qMe@hub.browserstack.com:80/wd/hub",
+            "desired_capabilities": {
+                "browser": "Firefox",
+                "browser_version": "47.0",
+                "os": "OS X",
+                "os_version": "El Capitan",
+                "resolution": "1024x768"
+            },
+            "viewportSize": {
+                "width": 1024,
+                "height": 768
+            },
+            "injectCss": ".video-wrapper { visibility: hidden; }",
+            "userAgent": "dpxdt-ZHGr3FnW8JnEu6ppR207j53p82koykKe"
+        }
+    }
+]
