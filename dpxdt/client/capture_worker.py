@@ -71,10 +71,6 @@ gflags.DEFINE_integer(
     'phantomjs_timeout', None,
     'Seconds until giving up on a phantomjs sub-process and trying again.')
 
-# TODO(elsigh): Consider changing default `capture_binary` to `python`
-# and `capture_script` to `capture.py` if BrowserStack writes back with
-# a free account for testing with dpxdt.
-
 gflags.DEFINE_string(
     'capture_format', 'png',
     'Screenshot format, e.g. png or bmp')
@@ -98,7 +94,7 @@ class CaptureFailedError(queue_worker.GiveUpAfterAttemptsError):
 
 
 class CaptureWorkflow(process_worker.ProcessWorkflow):
-    """Workflow for capturing a website screenshot using PhantomJs."""
+    """Workflow for capturing a website screenshot."""
 
     def __init__(self, log_path, config_path, output_path):
         """Initializer.
